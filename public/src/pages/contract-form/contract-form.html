@@ -1,0 +1,113 @@
+<template>
+
+    <form submit.trigger="onCreateContract()">
+
+      <div class="card section">
+
+        <div class="card-content">
+
+          <span class="card-title">Datos personales</span>
+
+        <div class="row">
+
+          <div class="col s12">
+              <select style="display:inline-block; width:auto" value.bind="identificationType">
+                <option value="Cédula">Cedula</option>
+                <option value="Pasaporte">Pasaporte</option>
+              </select>
+              <div class="input-field inline">
+              <input id="contact-data__identification" value.bind="identification" type="text" class="validate">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="contact-data__first-name-one" value.bind="firstNameOne" type="text" class="validate">
+            <label for="contact-data__first-name-one">Primer nombre</label>
+          </div>
+
+          <div class="input-field col s6">
+            <input id="contact-data__first-name-two" value.bind="firstNameTwo" type="text" class="validate">
+            <label for="contact-data__first-name-two">Segundo nombre</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="contact-data__last-name-one" value.bind="lastNameOne" type="text" class="validate">
+            <label for="contact-data__last-name-one">Primer apellido</label>
+          </div>
+
+          <div class="input-field col s6">
+            <input id="contact-data__last-name-two" value.bind="lastNameTwo" type="text" class="validate">
+            <label for="contact-data__last-name-two">Segundo apellido</label>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="input-field col s6">
+            <input id="contact-data__phone" value.bind="phone" type="tel" class="validate">
+            <label for="contact-data__phone">Telefono</label>
+          </div>
+
+          <div class="input-field col s6">
+            <input id="contact-data__email" value.bind="email" type="email" class="validate">
+            <label for="contact-data__email">Correo</label>
+          </div>
+
+        </div>
+      </div>
+
+      </div>
+
+      <div class="card section">
+
+        <div class="card-content">
+
+          <div class="row">
+            <span class="card-title col s12">Datos del contrato</span>
+          </div>
+
+          <div class="row">
+
+            <div class="col s6">
+              <select style="display:block" value.bind="terrainId" change.trigger="onChangeTerrain()">
+                  <option repeat.for="terrain of terrains" value="${terrain.id}">${terrain.name}</option>
+              </select>
+            </div>
+
+            <div class="col s6" css="display: ${terrain.type === 'Apartments' ? 'block' : 'none'}">
+              <select style="display:block" value.bind="number">
+                <option repeat.for="apartment of terrain.apartments" value="${apartment.id}">Numero: ${apartment.number}</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="row">
+              <div class="input-field col s6">
+                <input id="contact-data__date-start" value.bind="date" type="text" class="validate">
+                <label for="contact-data__date-start">Fecha de inicio</label>
+              </div>
+
+              <div class="input-field col s6">
+                <input id="contact-data__price" value.bind="price" type="text" class="validate">
+                <label for="contact-data__price">Precio</label>
+              </div>
+          </div>
+
+          <div>
+            <button class="waves-effect waves-light btn" type="submit">Crear documento</button>
+          </div>
+
+        </div>
+      </div>
+
+
+    </form>
+
+
+</template>

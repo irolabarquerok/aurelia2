@@ -1,0 +1,45 @@
+<template>
+    <!-- <require from="contract-view.css"></require>  -->
+    <style>
+
+        #contract-view {
+            width: 8.5in;
+            margin: auto;
+        }
+
+        #contract-view__wrapper {
+            margin: 1in;
+        }
+
+        #contract-view p {
+            font-size: 17px;
+            font-family: serif;
+            text-align: justify;
+            line-height: 2;
+        }
+
+        #contract-view p + p {
+            margin-bottom: 30px;
+        }
+
+        #contract-view p strong {
+            font-weight: bold;
+        }
+        
+        #contract-view table td {
+            width: 50%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #contract-view table td p {
+            margin: 0;
+        }
+
+    </style>
+
+    <div id="contract-view">
+        <div id="contract-view__wrapper" innerhtml.bind="contract"></div>
+    </div>
+
+</template>
