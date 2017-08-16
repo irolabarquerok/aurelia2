@@ -45,6 +45,13 @@ export class ContractForm {
         //contract
         this.identificationType = "Cédula";
         this.date = null;
+        this.dateOptions = {
+          closeOnSelect: true,
+          closeOnClear: false,
+          selectYears: 50,
+          selectMonths: true
+        };
+
         this.price = null;
 
     }
@@ -70,6 +77,7 @@ export class ContractForm {
         this.api.getTerrainDetails(this.terrainId)
         .then(terrain => {
           this.terrain = terrain;
+          this.selectAparmentNumber.refresh();
         });
     }
 
@@ -77,8 +85,9 @@ export class ContractForm {
 
     onCreateContract(){
 
+
         let name = this.terrain.name.replace(' ','-');
-	  let urlDocument = 'http://localhost/aurelia2/public/src/assets/documents/' + name + '.docx';
+	  let urlDocument = 'http://localhost/aurelia-contract/public/src/assets/documents/' + name + '.docx';
 
         httpClient.fetch(urlDocument)
         .then(response => response.arrayBuffer())
@@ -87,13 +96,11 @@ export class ContractForm {
         }))
         .then(data => this.createContract(data))
         .done(contract => {
-
-            console.log(contract);
-
-            firebase.database().ref('contracts/' + contract.terrain.name + "/" + contract.getTitle()).set(contract);
+            //firebase.database().ref('contracts/' + contract.terrain.name + "/" + contract.getTitle()).set(contract);
             sessionStorage.contract = contract.text;
-            window.location =  "/aurelia2/public/#/view"; 
+            window.location =  "/aurelia-contract/public/#/view";
         });
+
     }
 
     createContract(data){

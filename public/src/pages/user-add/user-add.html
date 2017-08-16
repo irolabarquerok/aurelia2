@@ -1,0 +1,34 @@
+<template>
+
+    <form submit.trigger="onCreateContract()">
+
+      <div class="card section">
+
+        <div class="card-content">
+
+          <span class="card-title">Autenticacion</span>
+
+        <div class="row">
+            <div class="input-field col s12">
+              <select md-select="container.bind: col s6;" value.bind="identificationType">
+               <option value="Cédula">Cédula</option>
+               <option value="Pasaporte">Pasaporte</option>
+             </select>
+         </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="contact-data__first-name-one" value.bind="email" type="text" class="validate">
+                <label for="contact-data__first-name-one">Correo</label>
+            </div>
+
+            <div class="input-field col s6">
+                <input id="contact-data__first-name-two" value.bind="password" type="text" class="validate">
+                <label for="contact-data__first-name-two">Contrasena</label>
+            </div>
+        </div>
+
+    </form>
+
+</template>

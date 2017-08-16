@@ -10,15 +10,17 @@
 
         <div class="row">
 
-          <div class="col s12">
-              <select style="display:inline-block; width:auto" value.bind="identificationType">
-                <option value="Cédula">Cedula</option>
-                <option value="Pasaporte">Pasaporte</option>
-              </select>
-              <div class="input-field inline">
-              <input id="contact-data__identification" value.bind="identification" type="text" class="validate">
+<div class="input-field col s6">
+              <select md-select="container.bind: col s6;" value.bind="identificationType">
+               <option value="Cédula">Cédula</option>
+               <option value="Pasaporte">Pasaporte</option>
+             </select>
+</div>
+
+            <div class="input-field col s6">
+                  <input id="contact-data__identification" value.bind="identification" type="text" class="validate">
+                  <label for="contact-data__identification">identificacion</label>
             </div>
-          </div>
 
         </div>
 
@@ -74,13 +76,13 @@
           <div class="row">
 
             <div class="col s6">
-              <select style="display:block" value.bind="terrainId" change.trigger="onChangeTerrain()">
+              <select  md-select="label:Terreno" value.two-way="terrainId" change.trigger="onChangeTerrain()">
                   <option repeat.for="terrain of terrains" value="${terrain.id}">${terrain.name}</option>
               </select>
             </div>
 
             <div class="col s6" css="display: ${terrain.type === 'Apartments' ? 'block' : 'none'}">
-              <select style="display:block" value.bind="number">
+              <select md-select="label:Numero de apartamento" md-select.ref="selectAparmentNumber" value.two-way="number">
                 <option repeat.for="apartment of terrain.apartments" value="${apartment.id}">Numero: ${apartment.number}</option>
               </select>
             </div>
@@ -89,13 +91,20 @@
 
           <div class="row">
               <div class="input-field col s6">
-                <input id="contact-data__date-start" value.bind="date" type="text" class="validate">
-                <label for="contact-data__date-start">Fecha de inicio</label>
+                    <div ref="dpWrapper">
+                      <input id="contact-data__date-start"
+                      md-datepicker="
+                      container.bind: dpWrapper;
+                      options.bind:dateOptions;
+                      value.two-way: date;"
+                      type="date" placeholder="Selecciona la fecha de inicio" />
+                      <label for="contact-data__date-start" class="active">Fecha de inicio</label>
+                    </div>
               </div>
 
               <div class="input-field col s6">
-                <input id="contact-data__price" value.bind="price" type="text" class="validate">
-                <label for="contact-data__price">Precio</label>
+                <input id="contact-data__price" value.bind="price" type="text" class="validate" placeholder="Digite el precio">
+                <label for="contact-data__price" class="active">Precio</label>
               </div>
           </div>
 

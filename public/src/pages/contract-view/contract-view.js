@@ -1,7 +1,3 @@
-import mammoth from 'mammoth';
-import {User} from '../../lib/class/user';
-import {Contract} from '../../lib/class/contract';
-
 
 export class ContractView {
 
@@ -11,7 +7,7 @@ export class ContractView {
     this.contract = sessionStorage.contract;
 
     if (!this.contract) {
-      window.location = "/aurelia2/public/#/create";
+      window.location = "/aurelia-contract/public/#/create";
     }
 
   }
