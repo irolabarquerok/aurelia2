@@ -1,45 +1,23 @@
 <template>
-    <!-- <require from="contract-view.css"></require>  -->
-    <style>
 
-        #contract-view {
-            width: 8.5in;
-            margin: auto;
-        }
-
-        #contract-view__wrapper {
-            margin: 1in;
-        }
-
-        #contract-view p {
-            font-size: 17px;
-            font-family: serif;
-            text-align: justify;
-            line-height: 2;
-        }
-
-        #contract-view p + p {
-            margin-bottom: 30px;
-        }
-
-        #contract-view p strong {
-            font-weight: bold;
-        }
-
-        #contract-view table td {
-            width: 50%;
-            margin: 0;
-            padding: 0;
-        }
-
-        #contract-view table td p {
-            margin: 0;
-        }
-
-    </style>
-
-    <div id="contract-view">
-        <div id="contract-view__wrapper" innerhtml.bind="contract"></div>
+	<md-card md-title="${contract.terrain.getTitle()}" repeat.for="contract of listOfContracts">
+    <div>
+    <h3>${contract.user.getFullName()}</h3>
+    <h4>${contract.dateStart}</h4>
+    <h5>${contract.price}</h5>
+    <a
+    md-button="flat: true;"
+    class="primary-text"
+    route-href="route: contract-preview; params.bind: {terrainId:contract.getTerrainId(), contractId:contract.getContractId()}"
+    click.delegate="$parent.select(contract)"
+    >Ver contrato</a>
     </div>
+  </md-card>
+
+  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a href="/aurelia-contract/public/#/contract/add" md-button="floating: true; large: true;">
+      <i class="large material-icons">add</i>
+    </a>
+  </div>
 
 </template>

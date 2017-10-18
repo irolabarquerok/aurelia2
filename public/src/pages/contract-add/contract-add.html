@@ -1,6 +1,6 @@
 <template>
 
-    <form submit.trigger="onCreateContract()">
+    <form submit.trigger="onSave()">
 
       <div class="card section">
 
@@ -115,7 +115,11 @@
         </div>
       </div>
 
-
+      <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <a md-button="floating: true; large: true;" md-tooltip="position: left; text: edit;">
+          <i class="large material-icons">add</i>
+        </a>
+      </div>
     </form>
 
 

@@ -110,7 +110,7 @@ let terrains = [
     },
     {
       id:getId(),
-      name:"Apartamento 19J",
+      name:"Apartamentos 19J",
       type:"Apartments",
       apartments: [
         {

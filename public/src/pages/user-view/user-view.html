@@ -1,0 +1,19 @@
+<template>
+	<md-card md-title="${user.identification}" repeat.for="user of listOfUsers">
+    <div>
+    <h3>${user.firstNameOne} ${user.firstNameTwo} ${user.lastNameOne} ${user.lastNameTwo}</h3>
+    <a
+    md-button="flat: true;"
+    class="primary-text"
+    href="/aurelia-contract/public/#/contract/preview/"
+    >Ver contrato</a>
+    </div>
+  </md-card>
+
+  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a href="/aurelia-contract/public/#/contract/add" md-button="floating: true; large: true;">
+      <i class="large material-icons">add</i>
+    </a>
+  </div>
+
+</template>

@@ -3,12 +3,17 @@ export class App {
   configureRouter(config, router){
     config.title = 'Contacts';
     config.map([
-      { route: ['', 'create'],      moduleId: 'pages/contract-form/contract-form',   title: 'Crear contrato'},
-      { route: 'view',  moduleId: 'pages/contract-view/contract-view', title: 'Vista contrato'},
-      { route: 'user/add',  moduleId: 'pages/user-add/user-add', title: 'Agregar usuario'}
+      { route: ['', 'contracts'],      moduleId: 'pages/contract-view/contract-view',   title: 'Contratos'},
+      { route: 'contract/add',  moduleId: 'pages/contract-add/contract-add', title: 'Crear contrato'},
+      { route: 'contract/preview/:terrainId/:contractId',  moduleId: 'pages/contract-preview/contract-preview', title: 'Vista contrato', name:'contract-preview'},
+
+      { route: 'users',  moduleId: 'pages/user-view/user-view', title: 'Inquilinos'},
+      { route: 'user/add',  moduleId: 'pages/user-add/user-add', title: 'Agregar inquilinos'},
+      { route: 'user/:id',  moduleId: 'pages/user-detail/user-detail', title: 'Agregar inquilinos'},
+      { route: 'user/edit/:id',  moduleId: 'pages/user-edit/user-edit', title: 'Agregar inquilinos'}
     ]);
 
-    this.router = router;
+	this.router = router;
   }
 
   constructor() {

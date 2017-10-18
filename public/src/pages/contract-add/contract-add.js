@@ -12,7 +12,7 @@ import {inject} from 'aurelia-framework';
 
 @inject(TerrainsAPI)
 
-export class ContractForm {
+export class ContractAdd {
 
     constructor(TerrainsAPI) {
 
@@ -73,22 +73,23 @@ export class ContractForm {
         });
     }
 
-    onChangeTerrain(){
-        this.api.getTerrainDetails(this.terrainId)
-        .then(terrain => {
-          this.terrain = terrain;
-          this.selectAparmentNumber.refresh();
-        });
-    }
+	onChangeTerrain(){
+		  this.api.getTerrainDetails(this.terrainId)
+		  .then(terrain => {
+		    this.terrain = terrain;
+		    this.selectAparmentNumber.refresh();
+		  });
+	}
 
      //data
 
-    onCreateContract(){
+    onSave(){
 
-
+        //obtiene el nombre del documento a buscar ej: "apartment-10k-2"
         let name = this.terrain.name.replace(' ','-');
-	  let urlDocument = 'http://localhost/aurelia-contract/public/src/assets/documents/' + name + '.docx';
+	    let urlDocument = 'http://localhost/aurelia-contract/public/src/assets/documents/' + name + '.docx';
 
+        //obtiene el documento
         httpClient.fetch(urlDocument)
         .then(response => response.arrayBuffer())
         .then(arrayBuffer => mammoth.convertToHtml({
@@ -96,9 +97,23 @@ export class ContractForm {
         }))
         .then(data => this.createContract(data))
         .done(contract => {
-            //firebase.database().ref('contracts/' + contract.terrain.name + "/" + contract.getTitle()).set(contract);
-            sessionStorage.contract = contract.text;
-            window.location =  "/aurelia-contract/public/#/view";
+
+            //obtiene los datos del contrato
+            var dataContract = contract.getData();
+            console.log(dataContract);
+
+            //guarda el contrato en firebase
+            firebase.database().ref('contracts/' + contract.getPath())
+            .set(dataContract).
+            then(() => {
+                //guarda el usuario en firebase
+                firebase.database().ref('users/' + contract.user.identification)
+                .set(contract.user)
+                .then(() =>{
+                    //muestra la vista previa
+                    window.location =  "/aurelia-contract/public/#/contract/preview/" +  contract.getPath();
+                });
+            });
         });
 
     }
@@ -107,6 +122,7 @@ export class ContractForm {
 
         let user = new User({
             identification : this.identification,
+            identificationType:this.identificationType,
 
             firstNameOne : this.firstNameOne,
             firstNameTwo: this.firstNameTwo,
@@ -133,12 +149,13 @@ export class ContractForm {
 
         let contract = new Contract({
             user:user,
-            identificationType:this.identificationType,
             terrain:terrain,
-            dateStart: new Date(this.date),
+            dateStart: this.date,
             price : this.price,
             text : data.value
         });
+
+	  contract.getTextContract();
 
         return contract;
 

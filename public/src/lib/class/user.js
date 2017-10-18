@@ -2,6 +2,7 @@ export class User {
   constructor(args) {
 
     this.identification = args["identification"];
+     this.identificationType = args["identificationType"];
 
     this.firstNameOne = args["firstNameOne"];
     this.firstNameTwo = args["firstNameTwo"];
